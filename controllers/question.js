@@ -6,19 +6,15 @@ var questionsModel = require('../model/questionModel');
 router.use(function timeLog (req, res, next) {
     console.log('Time: ', Date.now())
     next()
-  })
+})
 
-// module.exports = function(app) {
-//     app.get('/ques', questions.saveQuestion);
-// }
-
-router.get('/save', function (req, res) {
+router.post('/save', function (req, res) {
     try{
-        const question = "Ques";
-        const option1 = "Op 1";
-        const option2 = "Op 2";
-        const option3 = "Op 3";
-        const option4 = "Op 4";
+        const question = req.body.question;
+        const option1 = req.body.option1;
+        const option2 = req.body.option2;
+        const option3 = req.body.option3;
+        const option4 = req.body.option4;
         
         //Make post entry for save the data 
         const saveQuestion = new questionsModel({
@@ -28,13 +24,11 @@ router.get('/save', function (req, res) {
             option3: option3,
             option4: option4,
         })
-        console.log(saveQuestion);
         res.send(saveQuestion);
         saveQuestion.save(function(err,result){
             if(err){
                 res.status(404).send({message:"bad request"})
             }
-            console.log('Saved');
         })
     }
     catch(e){

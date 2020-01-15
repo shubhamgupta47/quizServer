@@ -10,16 +10,17 @@ var questions = require('./controllers/question');
 app.use(cors());
 
 app.use(bodyParser.json());
-app.use(bodyParser({limit: '50mb'}));
-app.use(bodyParser.urlencoded({extended:true,limit: '50mb'}));
+// app.use(bodyParser({limit: '50mb'}));
+// app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/questions', questions);
 
 console.log(__dirname);
 
 server.listen(7000,function(){
     console.log("server started on port 7000");
-    app.use('/questions', questions);
 });
 
 
