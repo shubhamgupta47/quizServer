@@ -5,7 +5,9 @@ var cors = require('cors');
 var db = require('./config/dbconfig')
 var app = express();
 var server   = require('http').Server(app);
-var questions = require('./controllers/question');
+var quiz = require('./controllers/quiz');
+var user = require('./controllers/user');
+var result = require('./controllers/result');
 
 app.use(cors());
 
@@ -15,7 +17,9 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/questions', questions);
+app.use('/quiz', quiz);
+app.use('/user', user);
+app.use('/result', result);
 
 console.log(__dirname);
 
