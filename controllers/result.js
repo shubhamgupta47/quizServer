@@ -34,4 +34,17 @@ router.post('/save', function (req, res) {
     } 
 })
 
+router.get('/getAll', function(req, res) {
+    try {
+        resultModel.find({}).populate('user_id quiz_id', 'name category').exec(function (err, rslt) {
+            if (err) console.log(err)
+            res.status(200).send(rslt);
+
+        });
+    }
+    catch(e){
+        res.status(404).send(e);
+    } 
+})
+
 module.exports = router;
